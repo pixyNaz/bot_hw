@@ -1,6 +1,5 @@
 from aiogram import Dispatcher, types
-from  config import bot, dp
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from config import bot, dp
 
 
 async def quiz_3(call: types.CallbackQuery):

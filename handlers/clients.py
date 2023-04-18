@@ -1,6 +1,7 @@
 from aiogram import Dispatcher, types
-from  config import bot, dp
-from  aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from config import bot
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from .client_kb import start_markup
 
 
 # @dp.message_handler(commands=['start'])
@@ -12,10 +13,9 @@ async def help_command(message: types.Message):
     await message.reply('I need help.')
 
 
-# @dp.message_handler(commands=['photo'])
 async def photos(message: types.Message):
     photo = open('media/mem2.jpeg', 'rb')
-    await message.answer_photo(photo, caption='Не беси меня!')
+    await message.answer_photo(photo, caption='Не беси меня!', reply_markup=start_markup)
 
 
 # @dp.message_handler(commands=['quiz'])
@@ -72,4 +72,3 @@ def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(quiz_1, commands=['quiz'])
     dp.register_callback_query_handler(quiz_2, text="quiz_1_button")
     dp.register_message_handler(help_command, commands=['help'])
-

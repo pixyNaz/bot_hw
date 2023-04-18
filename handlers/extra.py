@@ -1,5 +1,5 @@
 from aiogram import Dispatcher, types
-from  config import bot, dp
+from config import bot, dp
 
 
 # @dp.message_handler()
