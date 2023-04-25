@@ -80,8 +80,8 @@ async def cancel_reg(message: types.Message, state: FSMContext):
 
 
 def register_handler_fsm(dp: Dispatcher):
-    dp.register_message_handler(cancel_reg,Text(equals='отмена', ignore_case=True), state="*")
-    dp.register_message_handler(fsm_start, commands=['reg'])
+    dp.register_message_handler(cancel_reg,Text(equals='Oтмена', ignore_case=True), state="*")
+    dp.register_message_handler(fsm_start, commands=['Reg'])
     dp.register_message_handler(load_name, state=FSMAdminMentor.name)
     dp.register_message_handler(load_direction, state=FSMAdminMentor.direction)
     dp.register_message_handler(load_age, state=FSMAdminMentor.age)

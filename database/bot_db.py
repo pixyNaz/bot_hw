@@ -22,6 +22,22 @@ def sql_create():
         'gruop INTEGER)'
 
     )
+
+    db.execute(
+        'CREATE TABLE  IF NOT EXISTS users '
+        '(telegram_id INTEGER PRIMARY KEY , '
+        'username VARCHAR(50),'
+        'full_name VARCHAR(50))'
+    )
+    # db.commit()
+
+
+async def sql_command_all_users():
+    return cursor.execute("SELECT * FROM users").fetchall()
+
+
+async def sql_command_insert_user(telegram_id, username, full_name):
+    cursor.execute("INSERT INTO users VALUES (?, ?, ?)", (telegram_id, username, full_name))
     db.commit()
 
 

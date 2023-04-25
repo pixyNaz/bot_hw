@@ -2,11 +2,18 @@ from aiogram import Dispatcher, types
 from config import bot
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from .client_kb import start_markup
-from database.bot_db import sql_command_random
+from database.bot_db import sql_command_random, sql_command_all_users, sql_command_insert_user
+from .utils import get_ids_from_users
 
 
 # @dp.message_handler(commands=['start'])
 async def start_command(message: types.Message):
+    users = await sql_command_all_users()
+    ids = get_ids_from_users(users)
+    if message.from_user.id not in ids:
+        await sql_command_all_users(message.from_user.id,
+                                    message.from_user.username,
+                                    message.from_user.full_name)
     await bot.send_message(message.from_user.id, f"Привет подруга {message.from_user.full_name}!")
 
 
@@ -76,10 +83,10 @@ async def get_random_mentor(message:types.Message):
 
 
 def register_handlers_client(dp: Dispatcher):
-    dp.register_message_handler(start_command, commands=['start'])
-    dp.register_message_handler(photos, commands=['photo'])
-    dp.register_message_handler(quiz_1, commands=['quiz'])
-    dp.register_callback_query_handler(quiz_2, text="quiz_1_button")
-    dp.register_message_handler(help_command, commands=['help'])
+    dp.register_message_handler(start_command, commands=['Start'])
+    dp.register_message_handler(photos, commands=['Photo'])
+    dp.register_message_handler(quiz_1, commands=['Quiz'])
+    dp.register_callback_query_handler(quiz_2, text="Quiz_1_button")
+    dp.register_message_handler(help_command, commands=['Help'])
     dp.register_message_handler(get_random_mentor, commands=['get'])
 

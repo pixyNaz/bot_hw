@@ -2,7 +2,7 @@ from aiogram.utils import executor
 import logging
 
 from config import dp, ADMINS, bot
-from handlers import clients, extra, callback, admin, fsm_anketa
+from handlers import clients, extra, callback, admin, fsm_anketa, scheduler
 from database.bot_db import sql_create
 
 clients.register_handlers_client(dp)
@@ -14,6 +14,7 @@ extra.register_handler_extra(dp)
 
 
 async def mentordb(dp):
+    await scheduler.set_scheduler()
     sql_create()
     await bot.send_message(ADMINS[0], "Добрый день, я здесь чтобы вам помогат!")
 

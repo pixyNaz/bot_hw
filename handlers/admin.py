@@ -6,7 +6,7 @@ from database.bot_db import sql_command_all, sql_command_delete
 
 
 async def ban(message: types.Message):
-    if message.chat.type !='private':
+    if message.chat.type !='admin':
         if message.from_user.id not in ADMINS:
             await message.answer('Ты не администратор!')
         elif not message.reply_to_message:
