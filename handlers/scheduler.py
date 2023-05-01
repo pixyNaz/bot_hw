@@ -1,6 +1,4 @@
 import datetime
-from sched import scheduler
-
 from aiogram import Bot
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -21,6 +19,7 @@ async def set_scheduler():
         reminder,
         kwargs={"bot": bot},
         trigger=CronTrigger(
+            day=5,
             hour=20,
             start_date=datetime.datetime.now()
         )
